@@ -1,2 +1,2 @@
 # Covid19_dashboard
-COVID-19 interactive dashboard. Django backend, React frontend using Plotly and Axios. Track statistics of infections, deaths and recoveries at country and regional levels.
+Interaktywny dashboard COVID-19 w React z wykorzystaniem D3.js do wizualizacji danych z globalnych i lokalnych źródeł. Monitoruj statystyki zarażeń, zgonów i ozdrowieńców, porównuj kraje i regiony. Stworzony przy użyciu Bulma dla eleganckiego stylu.
