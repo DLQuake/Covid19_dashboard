@@ -14,12 +14,19 @@ const covidAPI = {
 
     getCountryStatistics: async (country) => {
         try {
-            const response = await axios.get(`${API_BASE_URL}/countries/${country}`);
+            let url;
+            if (country) {
+                url = `${API_BASE_URL}/countries/${country}`;
+            } else {
+                url = `${API_BASE_URL}/countries/`;
+            }
+            const response = await axios.get(url);
             return response.data;
         } catch (error) {
             throw new Error(`Error fetching country statistics: ${error.message}`);
         }
     },
+
 
     getHistoricalData: async (country) => {
         try {
