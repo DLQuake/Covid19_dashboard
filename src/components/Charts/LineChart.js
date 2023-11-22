@@ -2,71 +2,58 @@ import React, { useEffect, useRef } from 'react';
 import Chart from 'chart.js/auto';
 
 const LineChart = ({ data }) => {
-  const chartRef = useRef(null);
+	const chartRef = useRef(null);
 
-  useEffect(() => {
-    let chartInstance;
+	useEffect(() => {
+		if (!data || !data.cases) {
+			return;
+		}
 
-    if (data && chartRef.current) {
-      const transformedData = {
-        labels: data.map((entry) => entry.date),
-        datasets: [
-          {
-            label: 'Cases',
-            data: data.map((entry) => entry.cases),
-            borderColor: 'rgba(255, 99, 132, 1)',
-            borderWidth: 1,
-            fill: false,
-          },
-          {
-            label: 'Deaths',
-            data: data.map((entry) => entry.deaths),
-            borderColor: 'rgba(75, 192, 192, 1)',
-            borderWidth: 1,
-            fill: false,
-          },
-          {
-            label: 'Recovered',
-            data: data.map((entry) => entry.recovered),
-            borderColor: 'rgba(255, 205, 86, 1)',
-            borderWidth: 1,
-            fill: false,
-          },
-        ],
-      };
+		const dates = Object.keys(data.cases);
+		const cases = Object.values(data.cases);
+		const deaths = Object.values(data.deaths);
+		const recovered = Object.values(data.recovered);
 
-      const ctx = chartRef.current.getContext('2d');
+		const ctx = chartRef.current.getContext('2d');
 
-      // Zniszcz poprzedni wykres przed utworzeniem nowego
-      if (chartInstance) {
-        chartInstance.destroy();
-      }
+		if (chartRef.current.chart) {
+			chartRef.current.chart.destroy();
+		}
 
-      chartInstance = new Chart(ctx, {
-        type: 'line',
-        data: transformedData,
-        options: {
-          scales: {
-            x: {
-              type: 'category',
-            },
-            y: {
-              beginAtZero: true,
-            },
-          },
-        },
-      });
-    }
+		chartRef.current.chart = new Chart(ctx, {
+			type: 'line',
+			data: {
+				labels: dates,
+				datasets: [
+					{
+						label: 'Cases',
+						data: cases,
+						borderColor: 'rgba(75, 192, 192, 1)',
+						fill: false,
+					},
+					{
+						label: 'Deaths',
+						data: deaths,
+						borderColor: 'rgba(255, 0, 0, 1)',
+						fill: false,
+					},
+					{
+						label: 'Recovered',
+						data: recovered,
+						borderColor: 'rgba(0, 128, 0, 1)',
+						fill: false,
+					},
+				],
+			},
+		});
+	}, [data]);
 
-    // Czyść wykres przed odmontowaniem komponentu
-    return () => {
-      if (chartInstance) {
-        chartInstance.destroy();
-      }
-    };
-  }, [data]);
-
-  return <canvas ref={chartRef} />;
+	return (
+        <div className="box has-text-centered">
+            <h3 className="title is-4">Line Chart</h3>
+            <canvas ref={chartRef} />
+        </div>
+    );
 };
 
 export default LineChart;

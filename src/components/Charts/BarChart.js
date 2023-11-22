@@ -12,7 +12,7 @@ const BarChart = ({ data }) => {
                 labels: ['Cases', 'Deaths', 'Recovered'],
                 datasets: [
                     {
-                        label: 'Number of Cases',
+                        label: 'Number of Cases, Deaths, Recovered',
                         data: [data.cases, data.deaths, data.recovered],
                         backgroundColor: ['rgba(255, 99, 132, 0.2)', 'rgba(75, 192, 192, 0.2)', 'rgba(255, 205, 86, 0.2)'],
                         borderColor: ['rgba(255, 99, 132, 1)', 'rgba(75, 192, 192, 1)', 'rgba(255, 205, 86, 1)'],
@@ -38,6 +38,8 @@ const BarChart = ({ data }) => {
                         },
                         y: {
                             beginAtZero: true,
+                            max: 20000000,
+                            min: 0,
                         },
                     },
                 },
@@ -53,9 +55,9 @@ const BarChart = ({ data }) => {
     }, [data]);
 
     return (
-        <div className="chart-container">
-            <h3>Bar Chart</h3>
-            <canvas ref={chartRef} />;
+        <div className="box has-text-centered">
+            <h3 className="title is-4">Bar Chart</h3>
+            <canvas ref={chartRef} />
         </div>
     );
 };
