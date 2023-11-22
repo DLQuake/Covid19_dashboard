@@ -22,18 +22,26 @@ const Statistics = () => {
 
     return (
         <div className="statistics-container">
-            <h2>Global Statistics</h2>
-            <div className="statistic">
-                <div className="statistic-label">Cases:</div>
-                <div className="statistic-value">{globalStats && globalStats.cases}</div>
-            </div>
-            <div className="statistic">
-                <div className="statistic-label">Deaths:</div>
-                <div className="statistic-value">{globalStats && globalStats.deaths}</div>
-            </div>
-            <div className="statistic">
-                <div className="statistic-label">Recovered:</div>
-                <div className="statistic-value">{globalStats && globalStats.recovered}</div>
+            <h2 className="title is-3 has-text-centered has-text-white">Global Statistics</h2>
+            <div className="columns">
+                <div className="column">
+                    <div className="box has-background-primary has-text-centered">
+                        <h3 className="subtitle is-5 has-text-white">Cases</h3>
+                        <p className="is-size-4 has-text-white">{globalStats && globalStats.cases}</p>
+                    </div>
+                </div>
+                <div className="column">
+                    <div className="box has-background-danger has-text-centered">
+                        <h3 className="subtitle is-5 has-text-white">Deaths</h3>
+                        <p className="is-size-4 has-text-white">{globalStats && globalStats.deaths}</p>
+                    </div>
+                </div>
+                <div className="column">
+                    <div className="box has-background-success has-text-centered">
+                        <h3 className="subtitle is-5 has-text-white">Recovered</h3>
+                        <p className="is-size-4 has-text-white">{globalStats && globalStats.recovered}</p>
+                    </div>
+                </div>
             </div>
         </div>
     );
