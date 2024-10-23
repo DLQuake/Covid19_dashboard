@@ -1,0 +1,25 @@
+.flagimage {
+  display: flex;
+  justify-content: center;
+}
+
+.table-container {
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.sticky-search {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  padding: 10px;
+}
+
+.table-wrapper {
+  overflow-x: auto;
+}
+
+.table {
+  min-width: 600px;
+}
